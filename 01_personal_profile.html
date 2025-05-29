@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="蘇銘泰 (Teddy) - ROV系統整合工程師 | 硬體研發工程師 | 機電整合專家 | 具備豐富的水下技術、程式開發與CAD/CAE模擬經驗">
+    <meta name="keywords" content="ROV系統整合,硬體研發工程師,機電整合,Python,C++,SolidWorks,ANSYS,水下技術,蘇銘泰,Teddy">
+    <meta name="author" content="蘇銘泰 (Teddy)">
+    <title>蘇銘泰 (Teddy) - ROV系統整合工程師 | 硬體研發工程師</title>
+    
+    <style>
+        /* 基礎設定與字體 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        /* 容器與版面配置 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 頁首區域 */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-name {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .profile-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+        
+        .profile-motto {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+        }
+        
+        .contact-buttons {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 0 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        /* 主要內容區域 */
+        main {
+            background-color: white;
+            margin: -30px auto 0;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* 區塊樣式 */
+        .section {
+            padding: 50px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #3498db;
+            border-radius: 2px;
+        }
+        
+        /* 個人簡介區域 */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .personal-info {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .info-value {
+            color: #555;
+        }
+        
+        /* 技能區域 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-category {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-top: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .skill-list li:before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 0.8rem;
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* 經歷區域 */
+        .timeline {
+            position: relative;
+            max-width: 100%;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #3498db;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: #3498db;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #3498db;
+        }
+        
+        .timeline-item:nth-child(odd)::before {
+            right: -35px;
+        }
+        
+        .timeline-item:nth-child(even)::before {
+            left: -35px;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .company {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .duration {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .achievements {
+            list-style: none;
+        }
+        
+        .achievements li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .achievements li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 學歷區域 */
+        .education-grid {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .education-item {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .education-item h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .degree {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .education-duration {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        /* 證照區域 */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .certificate-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 3px solid #3498db;
+        }
+        
+        .certificate-item h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .certificate-type {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        /* 聯絡資訊區域 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .contact-item {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 頁尾 */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 2.2rem;
+            }
+            
+            .profile-title {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+            
+            .timeline-item::before {
+                left: -35px !important;
+            }
+            
+            .contact-buttons {
+                text-align: center;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                max-width: 250px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .section {
+                padding: 30px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .profile-name {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 頁首區域 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="profile-name">蘇銘泰 (Teddy)</h1>
+                <p class="profile-title">ROV系統整合工程師 | 硬體研發工程師</p>
+                <p class="profile-motto">"不要怕困難、不要嫌麻煩，保持執行力～"</p>
+                <div class="contact-buttons">
+                    <a href="mailto:aaa50907@gmail.com" class="btn">聯絡我</a>
+                    <a href="https://pda.104.com.tw/profile/share/8tXqz2RyfJzGKuAFxi287VI7aJIeYbrE" target="_blank" class="btn btn-secondary">查看完整履歷</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容 -->
+    <main>
+        <!-- 個人簡介區域 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">關於我</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>我是蘇銘泰，具備<span class="highlight">2-3年豐富工作經驗</span>的ROV系統整合工程師與硬體研發專家。目前任職於財團法人金屬工業研究發展中心，專精於<span class="highlight">水下ROV技術、機電整合與硬體開發</span>。</p>
+                        
+                        <p>擁有國立臺灣海洋大學機械與機電工程碩士學位，研究專長涵蓋<span class="highlight">電化學與元件設計、再生能源系統</span>以及<span class="highlight">CAE模擬分析</span>。在學術與實務並重的背景下，我致力於將創新技術應用於實際產品開發。</p>
+                        
+                        <p>個性開朗，<span class="highlight">善於團隊合作與跨領域溝通</span>，對技術細節保持高度熱忱。具備完整的產品開發流程經驗，從概念設計到產品落地皆有深度參與，期待在硬體研發領域持續創新突破。</p>
+                    </div>
+                    
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <span class="info-label">年齡</span>
+                            <span class="info-value">25歲</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">居住地</span>
+                            <span class="info-value">新北市板橋區</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">工作經驗</span>
+                            <span class="info-value">2-3年</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">英文能力</span>
+                            <span class="info-value">TOEIC 585分</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">希望職類</span>
+                            <span class="info-value">ROV系統整合工程師<br>硬體研發工程師</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">可上班日</span>
+                            <span class="info-value">隨時</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 專業技能區域 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">專業技能</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>🔧 機電整合與硬體開發</h3>
+                        <ul class="skill-list">
+                            <li>ROV系統設計與整合</li>
+                            <li>水下聲納掃描平台開發</li>
+                            <li>步進馬達控制與感測器整合</li>
+                            <li>Arduino與微控制器程式設計</li>
+                            <li>硬體測試與系統調試</li>
+                            <li>電子電路設計與分析</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>💻 程式開發能力</h3>
+                        <ul class="skill-list">
+                            <li>Python (機器學習、數據分析)</li>
+                            <li>C++ (嵌入式系統開發)</li>
+                            <li>MATLAB (數值分析與模擬)</li>
+                            <li>C# (應用程式開發)</li>
+                            <li>MySQL (資料庫設計)</li>
+                            <li>機器學習 (PyTorch、YOLO、ResNet)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>🎯 CAD/CAE模擬分析</h3>
+                        <ul class="skill-list">
+                            <li>SolidWorks (3D建模與工程圖)</li>
+                            <li>ANSYS (結構與流體分析)</li>
+                            <li>COMSOL (電化學模擬)</li>
+                            <li>Creo (參數化設計)</li>
+                            <li>AutoCAD (2D製圖)</li>
+                            <li>Moldex3D (模流分析)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>🌊 水下技術與影像處理</h3>
+                        <ul class="skill-list">
+                            <li>聲納數據處理與3D點雲建立</li>
+                            <li>水下ROV影像辨識技術</li>
+                            <li>2D-3D座標系統映射</li>
+                            <li>ComfyUI影像生成模型</li>
+                            <li>海洋工程設備開發</li>
+                            <li>水下結構檢測技術</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>⚡ 再生能源與IoT系統</h3>
+                        <ul class="skill-list">
+                            <li>液流電池設計與驗證</li>
+                            <li>風力發電系統分析</li>
+                            <li>太陽能系統監控 (SCADA)</li>
+                            <li>LoRa物聯網技術</li>
+                            <li>Node-RED視覺化界面</li>
+                            <li>能源效率分析與優化</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>📊 數據分析與專案管理</h3>
+                        <ul class="skill-list">
+                            <li>Origin數據視覺化</li>
+                            <li>統計分析與實驗設計</li>
+                            <li>技術報告撰寫</li>
+                            <li>專利地圖建立</li>
+                            <li>BOM表管理與成本分析</li>
+                            <li>產品規格書制定</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作經歷區域 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">工作經歷</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="company">財團法人金屬工業研究發展中心</div>
+                            <h3>ROV系統整合工程師</h3>
+                            <div class="duration">2024年10月 - 目前在職</div>
+                            <ul class="achievements">
+                                <li>負責水下ROV系統的硬體研發設計與電子電路設計</li>
+                                <li>執行新產品研發與測試，產品機構設計與零件測試驗證</li>
+                                <li>建立產品專利地圖及專利資料庫，提升技術競爭力</li>
+                                <li>開發基於Arduino控制的水下聲納掃描平台</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="company">財團法人金屬工業研究發展中心</div>
+                            <h3>學界研究員 (演算法工程師)</h3>
+                            <div class="duration">2023年7月 - 2024年7月</div>
+                            <ul class="achievements">
+                                <li>開發圖像轉換與點雲數據疊合之創新技術</li>
+                                <li>建立聲納與可見光影像圖象融合技術</li>
+                                <li>實現2D-3D與載具多座標系統映射技術</li>
+                                <li>完成聲納數據轉換至3D點雲模型，大幅提升檢測準確性</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="company">國立臺灣海洋大學</div>
+                            <h3>化學實驗教學助理</h3>
+                            <div class="duration">2023年9月 - 2024年2月</div>
+                            <ul class="achievements">
+                                <li>負責普通化學、有機化學和分析化學實驗課程教學管理</li>
+                                <li>協助實驗室安衛環保與維持教學卓越計畫成果</li>
+                                <li>化學檢測儀器操作與實驗室設備管理</li>
+                                <li>執行化學智慧教學行政業務</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="company">迪銳能源有限公司</div>
+                            <h3>研發驗證人員 (電子產品系統工程師)</h3>
+                            <div class="duration">2023年4月 - 2023年6月</div>
+                            <ul class="achievements">
+                                <li>液流電池技術開發與驗證</li>
+                                <li>模擬軟體驗證與風場評估</li>
+                                <li>再生能源創儲能效率分析</li>
+                                <li>電池壽命預估方法開發</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="company">康舒科技股份有限公司</div>
+                            <h3>機構設計工程師 (R&D/ME)</h3>
+                            <div class="duration">2020年9月 - 2021年9月</div>
+                            <ul class="achievements">
+                                <li>建置標準化零件資料庫，為公司節省超過270小時工時</li>
+                                <li>協助導入Moldex3D模流分析，提升成型精度與生產效率</li>
+                                <li>負責電子零組件3D建模、2D工程圖與BOM表建立</li>
+                                <li>榮獲企業認可與工程院實習優異第一名殊榮</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 學歷區域 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">學歷背景</h2>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <h3>國立臺灣海洋大學</h3>
+                        <div class="degree">機械與機電工程學系暨研究所 碩士</div>
+                        <div class="education-duration">2022年9月 - 2024年6月</div>
+                        <p><strong>專業領域：</strong>設計製造組、電化學與元件設計實驗室</p>
+                        <p><strong>研究方向：</strong>機電整合、CAE模擬、再生能源與水下設備技術</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <h3>明志科技大學</h3>
+                        <div class="degree">機械工程學系 學士</div>
+                        <div class="education-duration">2018年9月 - 2022年6月</div>
+                        <p><strong>專業領域：</strong>精密機械組、智慧製造跨領域學位學程</p>
+                        <p><strong>輔修課程：</strong>精密加工、智慧製造、機電整合</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <h3>臺北市立陽明高中</h3>
+                        <div class="degree">普通科 高中</div>
+                        <div class="education-duration">2015年9月 - 2018年6月</div>
+                        <p><strong>專業領域：</strong>國際人文班</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 專業證照區域 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">專業證照</h2>
+                <div class="certificates-grid">
+                    <div class="certificate-item">
+                        <h4>TQC+ 產品設計專業人員</h4>
+                        <div class="certificate-type">Creo Parametric/SolidWorks</div>
+                    </div>
+                    
+                    <div class="certificate-item">
+                        <h4>SolidWorks CSWA</h4>
+                        <div class="certificate-type">原廠認證檢定</div>
+                    </div>
+                    
+                    <div class="certificate-item">
+                        <h4>Machine Learning Specialist</h4>
+                        <div class="certificate-type">SAS Viya 3.5</div>
+                    </div>
+                    
+                    <div class="certificate-item">
+                        <h4>初級救護技術員</h4>
+                        <div class="certificate-type">EMT1</div>
+                    </div>
+                    
+                    <div class="certificate-item">
+                        <h4>TQC-OA 中文輸入</h4>
+                        <div class="certificate-type">辦公軟體應用</div>
+                    </div>
+                    
+                    <div class="certificate-item">
+                        <h4>國語文寫作能力檢定</h4>
+                        <div class="certificate-type">整體等第：良</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯絡方式區域 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">聯絡方式</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <h3>行動電話</h3>
+                        <p><a href="tel:0906389126">0906-389-126</a></p>
+                        <p>聯絡時間：10:00 ~ 21:00</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <h3>電子信箱</h3>
+                        <p><a href="mailto:aaa50907@gmail.com">aaa50907@gmail.com</a></p>
+                        <p>歡迎透過 Email 聯絡</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🏠</div>
+                        <h3>居住地區</h3>
+                        <p>新北市板橋區</p>
+                        <p>可工作地區：台北市、新北市、桃園市</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <h3>完整履歷</h3>
+                        <p><a href="https://pda.104.com.tw/profile/share/8tXqz2RyfJzGKuAFxi287VI7aJIeYbrE" target="_blank">104人力銀行履歷</a></p>
+                        <p>詳細工作經歷與作品集</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 蘇銘泰 (Teddy). All rights reserved. | ROV系統整合工程師 | 硬體研發工程師</p>
+        </div>
+    </footer>
+</body>
+</html>
