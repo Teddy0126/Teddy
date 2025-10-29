@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 
+      SEO 優化建議:
+      - Title: 包含核心關鍵字 "熱流工程師", "散熱工程師" 和您的名字。
+      - Description: 精確描述您的專業，再次植入關鍵字，吸引HR點擊。
+      - Keywords: 羅列所有相關的技術和職位關鍵字。
+    -->
+    <title>蘇銘泰 (Teddy Su) | 熱流工程師 | 散熱工程師 | 個人網站</title>
+    <meta name="description" content="蘇銘泰 (Teddy Su) 的個人品牌網站，專注於熱流工程與散熱設計。展示CFD模擬分析 (ANSYS, COMSOL)、CAD設計 (SolidWorks) 專業技能與專案經歷。">
+    <meta name="keywords" content="熱流工程師, 散熱工程師, 蘇銘泰, Teddy Su, CFD, ANSYS, COMSOL, 熱流模擬, 散熱設計, 熱阻, 散熱器, 電子散熱, 基因演算法, Python, SolidWorks, 熱傳, 流體力學">
+    <meta name="author" content="蘇銘泰 (Teddy Su)">
+
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 載入 Inter 字體 (科技業常用，簡潔專業) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 載入 Heroicons (用於圖示) -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* 使用 Noto Sans TC 作為中文字體，Inter 作為英數字體，
+          這是目前科技業網站最專業且易讀的字體組合。
+        */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8f9fa; /* 淺灰色背景 */
+            color: #1f2937; /* 深灰色文字 */
+        }
+
+        /* 導覽列毛玻璃效果 */
+        .backdrop-blur-custom {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* 專案卡片的 hover 效果 */
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 時間軸線條 */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #e5e7eb; /* 淺灰色線條 */
+            transform: translateX(-50%);
+        }
+
+        /* 時間軸圓點 */
+        .timeline-dot {
+            position: absolute;
+            top: 4px; /* 對齊標題 */
+            left: 50%;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: white;
+            border: 3px solid #3b82f6; /* 品牌藍色 */
+            border-radius: 9999px;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* 響應式時間軸：在小螢幕上靠左對齊 */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 10px;
+                transform: translateX(0);
+            }
+            .timeline-dot {
+                left: 10px;
+                transform: translateX(-50%);
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 3rem;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(even) {
+                transform: none;
+            }
+            .timeline-item:nth-child(odd) .timeline-content {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- 
+      導覽列 (Navbar)
+      - 專業網站的必備元素。
+      - `sticky top-0`: 確保導覽列隨時可見。
+      - `backdrop-blur-custom`: 現代的毛玻璃效果。
+    -->
+    <header class="sticky top-0 z-50 w-full bg-white/90 shadow-sm backdrop-blur-custom">
+        <nav class="container mx-auto max-w-6xl px-4">
+            <div class="flex h-16 items-center justify-between">
+                <!-- Logo / 您的名字 -->
+                <a href="#home" class="text-xl font-bold text-gray-900">蘇銘泰 (Teddy Su)</a>
+
+                <!-- 導覽連結 (桌面版) -->
+                <div class="hidden space-x-6 md:flex">
+                    <a href="#story" class="text-gray-600 hover:text-blue-600">品牌故事</a>
+                    <a href="#experience" class="text-gray-600 hover:text-blue-600">專業經歷</a>
+                    <a href="#skills" class="text-gray-600 hover:text-blue-600">技能專長</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-blue-600">重點作品集</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600">與我聯繫</a>
+                </div>
+
+                <!-- 聯絡 CTA (桌面版) -->
+                <a href="#contact" class="hidden rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-md transition-all hover:bg-blue-700 md:block">
+                    Contact Me
+                </a>
+
+                <!-- 手機版選單按鈕 -->
+                <button id="mobile-menu-button" class="text-2xl text-gray-700 md:hidden">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+            </div>
+        </nav>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden bg-white shadow-lg md:hidden">
+            <a href="#story" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">品牌故事</a>
+            <a href="#experience" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">專業經歷</a>
+            <a href="#skills" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">技能專長</a>
+            <a href="#portfolio" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">重點作品集</a>
+            <a href="#contact" class="block px-4 py-3 text-gray-700 hover:bg-gray-100">與我聯繫</a>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main>
+
+        <!-- 
+          Section 1: 英雄區域 (Hero) & 品牌故事 (Module 3)
+          - 這是訪客第一眼會看到的內容，必須精準傳達您的價值主張。
+          - 標題直接鎖定 "熱流工程師"，強化 SEO。
+        -->
+        <section id="home" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-6xl px-4">
+                <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+                    <!-- 左側文字內容 -->
+                    <div>
+                        <span class="mb-2 block font-medium text-blue-600">蘇銘泰 (Teddy Su)</span>
+                        <h1 class="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
+                            專注於數據與實證的<br>
+                            <span class="text-blue-600">熱流工程師</span>
+                        </h1>
+                        
+                        <!-- 
+                          個人品牌故事 (Module 3)
+                          - 根據您的履歷改寫，強調「熱流」專業。
+                          - 語境符合台灣科技業求職：強調「解決問題」、「實務經驗」、「自動化」。
+                        -->
+                        <div id="story" class="mt-8 space-y-4 text-lg text-gray-700">
+                            <p>
+                                我是一名專注於「熱」與「流」的機械工程師。我的熱情在於使用 CFD 與 CAE 工具解析複雜的物理現象，並找出最佳工程解方。
+                            </p>
+                            <p>
+                                從大學專題的<strong class="font-semibold text-gray-900">「基因演算法散熱器優化」 (ANSYS + Python)</strong> 到研究所的<strong class="font-semibold text-gray-900">「電化學流場模擬」 (COMSOL)</strong>，我累積了紮實的模擬分析能力。
+                            </p>
+                            <p>
+                                在康舒科技的實習與金屬中心的研發經驗，讓我具備從理論分析、模擬驗證、CAD設計到系統整合的完整經驗。我擅長將數據轉化為有價值的產品設計，追求的不只是解決問題，更是創造<strong class="font-semibold text-gray-900">高效、可靠的散熱與熱流系統</strong>。
+                            </p>
+                        </div>
+
+                        <!-- CTA 按鈕 -->
+                        <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+                            <a href="#portfolio" class="inline-block rounded-full bg-blue-600 px-8 py-3 text-center font-medium text-white shadow-lg transition-all hover:bg-blue-700">
+                                查看重點作品集
+                            </a>
+                            <a href="#contact" class="inline-block rounded-full bg-gray-200 px-8 py-3 text-center font-medium text-gray-800 shadow-sm transition-all hover:bg-gray-300">
+                                與我聯繫
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 右側圖片 (示意圖) -->
+                    <div class="hidden md:block">
+                        <!-- 
+                          使用 placeholder 圖片，您可以替換成您的專業照片或CFD模擬圖。
+                          SEO 優化: 圖片的 alt 屬性包含關鍵字。
+                        -->
+                        <img src="https://placehold.co/500x500/3b82f6/ffffff?text=CFD+Simulation&font=inter" 
+                             alt="熱流工程師CFD模擬示意圖" 
+                             class="rounded-2xl object-cover shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          Section 2: 專業經歷 (Module 1)
+          - 使用專業的時間軸 (Timeline) 格式呈現。
+          - 策略性地「重新排序」每項工作的成果，將與「熱流」最相關的放在第一點。
+        -->
+        <section id="experience" class="bg-white py-24">
+            <div class="container mx-auto max-w-4xl px-4">
+                <h2 class="mb-16 text-center text-3xl font-bold text-gray-900 md:text-4xl">
+                    專業經歷
+                </h2>
+
+                <div class="relative">
+                    <!-- 時間軸中心線 -->
+                    <div class="timeline-line hidden md:block"></div>
+
+                    <!-- 經歷 1: 金屬工業研究發展中心 -->
+                    <div class="timeline-item mb-12 flex w-full flex-row-reverse md:w-1/2 md:transform md:translate-x-full">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content w-full rounded-lg bg-gray-50 p-6 shadow-md md:text-right">
+                            <h3 class="text-xl font-bold text-blue-600">ROV系統整合工程師 (研替)</h3>
+                            <p class="text-md font-semibold text-gray-800">財團法人金屬工業研究發展中心</p>
+                            <p class="mb-4 text-sm text-gray-500">2024/10 - 至今</p>
+                            <ul class="space-y-2 text-left text-gray-700">
+                                <!-- 
+                                  成果排序：
+                                  1. CFD (最相關)
+                                  2. 風機 (次相關)
+                                  3. 系統整合 (展現廣度)
+                                -->
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>運用 <strong>COMSOL (k-e, k-w, SST)</strong> 執行 CFD 流場分析與模擬。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>執行「新型自轉軸浮式風機」計畫，使用 <strong>CFD 與 BEM</strong> 進行氣動模擬與負載分析。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>主導開發「水下多功能探測UI介面」，整合影像辨識、3D點雲與磁力數據可視化。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 經歷 2: 碩士研究 -->
+                    <div class="timeline-item mb-12 flex w-full md:w-1/2">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content w-full rounded-lg bg-gray-50 p-6 shadow-md">
+                            <h3 class="text-xl font-bold text-blue-600">碩士研究 (電化學與元件設計實驗室)</h3>
+                            <p class="text-md font-semibold text-gray-800">國立臺灣海洋大學</p>
+                            <p class="mb-4 text-sm text-gray-500">2022/09 - 2024/06</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>專注「液流電池」設計，使用 <strong>COMSOL</strong> 進行理論推導與模擬驗證，深入<strong class="font-semibold">電化學與流場耦合分析</strong>。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>與金屬中心合作，投入水下ROV即時3D點雲建立與影像辨識技術開發。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 經歷 3: 康舒科技 (實習) -->
+                    <div class="timeline-item mb-12 flex w-full flex-row-reverse md:w-1/2 md:transform md:translate-x-full">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content w-full rounded-lg bg-gray-50 p-6 shadow-md md:text-right">
+                            <h3 class="text-xl font-bold text-blue-600">機構設計工程師 (實習)</h3>
+                            <p class="text-md font-semibold text-gray-800">康舒科技 (AcBel)</p>
+                            <p class="mb-4 text-sm text-gray-500">2020/09 - 2021/09</p>
+                            <ul class="space-y-2 text-left text-gray-700">
+                                <!-- 
+                                  成果排序：
+                                  1. 模流 (最相關)
+                                  2. 電源供應器 (產業相關)
+                                  3. 獎項 (重要佐證)
+                                -->
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>協助導入 <strong>Moldex3D 模流分析</strong>，加速發泡成型技術概念引入，提升成型精度。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>負責<strong class="font-semibold">電源供應器 (PSU)</strong> 外殼機構設計 (塑膠件、鉑金件) 及BOM表建立。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-2 mt-1 flex-shrink-0 text-green-600"></ion-icon>
+                                    <span>榮獲「<strong class="font-semibold">工程院實習優異第一名</strong>」及企業認可。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          Section 3: 技能與專長 (Module 2)
+          - 依照要求分為三類：硬技能、跨領域、軟技能。
+          - 每個技能都附上「佐證」 (來自您的履歷)。
+        -->
+        <section id="skills" class="py-24">
+            <div class="container mx-auto max-w-6xl px-4">
+                <h2 class="mb-16 text-center text-3xl font-bold text-gray-900 md:text-4xl">
+                    技能與專長
+                </h2>
+
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                    <!-- 硬技能 (Hard Skills) -->
+                    <div class="rounded-lg bg-white p-8 shadow-lg">
+                        <ion-icon name="hardware-chip-outline" class="mb-4 text-4xl text-blue-600"></ion-icon>
+                        <h3 class="mb-4 text-2xl font-bold text-gray-900">硬技能<br>(熱流/機構)</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <ion-icon name="flash-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">CFD / CAE 模擬</strong>
+                                    <p class="text-sm text-gray-500">ANSYS (Fluent), COMSOL (Heat/Flow/Electrochemistry), QBlade, Moldex3D</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <ion-icon name="cube-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">3D / 2D CAD 設計</strong>
+                                    <p class="text-sm text-gray-500">SolidWorks (CSWA 認證), Creo (TQC+ 認證), AutoCAD</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <ion-icon name="code-slash-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">程式語言</strong>
+                                    <p class="text-sm text-gray-500">Python (自動化模擬/AI), MATLAB, C/C++, HTML</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 跨領域能力 (Interdisciplinary) -->
+                    <div class="rounded-lg bg-white p-8 shadow-lg">
+                        <ion-icon name="git-merge-outline" class="mb-4 text-4xl text-blue-600"></ion-icon>
+                        <h3 class="mb-4 text-2xl font-bold text-gray-900">跨領域能力<br>(整合/數據)</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <ion-icon name="analytics-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">數據科學 & AI</strong>
+                                    <p class="text-sm text-gray-500">Machine Learning (SAS Viya 認證), PyTorch, YOLO, ResNet</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <ion-icon name="logo-electron" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">機電整合 & IoT</strong>
+                                    <p class="text-sm text-gray-500">ROV 系統整合, Arduino, LoRa, Node-RED, SCADA</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <ion-icon name="document-text-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">專案與文件</strong>
+                                    <p class="text-sm text-gray-500">能源署計畫書撰寫, 專利地圖, BOM表建立</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 軟技能 (Soft Skills) -->
+                    <div class="rounded-lg bg-white p-8 shadow-lg">
+                        <ion-icon name="people-outline" class="mb-4 text-4xl text-blue-600"></ion-icon>
+                        <h3 class="mb-4 text-2xl font-bold text-gray-900">軟技能<br>(協作/思維)</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <ion-icon name="chatbubbles-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">團隊合作與溝通</strong>
+                                    <p class="text-sm text-gray-500">樂於討論與相互助長的學習氛圍，具跨部門協作經驗。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <ion-icon name="bulb-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">邏輯思維與執行力</strong>
+                                    <p class="text-sm text-gray-500">對技術細節保持熱忱，具備創造力與專案執行力。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <ion-icon name="school-outline" class="mr-3 mt-1 text-blue-600"></ion-icon>
+                                <div>
+                                    <strong class="font-semibold">持續學習</strong>
+                                    <p class="text-sm text-gray-500">閒暇時研究新技術與工具，參與技術論壇交流。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          Section 4: 重點作品集 (Portfolio)
+          - 這是說服技術主管的關鍵頁面。
+          - 專案 1 必須是「散熱器」專案，這是您的王牌。
+          - 每個卡片都包含連結 (可連到 GitHub 或專案報告)。
+        -->
+        <section id="portfolio" class="bg-white py-24">
+            <div class="container mx-auto max-w-6xl px-4">
+                <h2 class="mb-16 text-center text-3xl font-bold text-gray-900 md:text-4xl">
+                    重點作品集
+                </h2>
+
+                <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+
+                    <!-- 作品 1: 散熱器優化 (王牌專案) -->
+                    <div class="project-card flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-all duration-300">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Heat+Sink+GA+Optimization&font=inter" alt="散熱器基因演算法優化" class="h-48 w-full object-cover">
+                        <div class="flex flex-1 flex-col p-6">
+                            <h3 class="mb-3 text-xl font-bold text-gray-900">基於基因演算法 (GA) 的散熱器設計優化</h3>
+                            <p class="mb-4 flex-1 text-gray-700">
+                                (學士專題) 開發全自動化流程，結合 <strong>Python (GA)</strong> 與 <strong>ANSYS</strong> 模擬，成功找出最佳散熱鰭片厚度，達成<strong class="font-semibold">最低熱阻 (Thermal Resistance)</strong> 設計。
+                            </p>
+                            <div class="mb-4">
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">CFD</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">ANSYS</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">Python</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800">散熱設計</span>
+                            </div>
+                            <!-- 
+                              嵌入連結: 
+                              請將 href="#" 替換成您的 GitHub 專案、報告或簡報連結。
+                            -->
+                            <a href="https://drive.google.com/file/d/1_DFYOUyktFbJoTB5ocZSY8ucUlz8N4q0/view" target="_blank" class="mt-auto inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
+                                查看專案詳情
+                                <ion-icon name="arrow-forward-outline" class="ml-1"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 作品 2: 液流電池 (碩士研究) -->
+                    <div class="project-card flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-all duration-300">
+                        <img src="https://placehold.co/600x400/10b981/ffffff?text=Flow+Battery+Simulation&font=inter" alt="液流電池熱流耦合模擬" class="h-48 w-full object-cover">
+                        <div class="flex flex-1 flex-col p-6">
+                            <h3 class="mb-3 text-xl font-bold text-gray-900">全釩液流電池 - 熱流耦合分析</h3>
+                            <p class="mb-4 flex-1 text-gray-700">
+                                (碩士研究) 使用 <strong>COMSOL Multiphysics</strong> 模擬電池內部流場、電化學反應與溫度分佈，深入探討<strong class="font-semibold">熱流耦合 (Conjugate Heat Transfer)</strong> 現象，驗證並優化電池效能。
+                            </p>
+                            <div class="mb-4">
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">CFD</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">COMSOL</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">熱流耦合</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">電化學</span>
+                            </div>
+                            <a href="#" target="_blank" class="mt-auto inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
+                                查看研究詳情
+                                <ion-icon name="arrow-forward-outline" class="ml-1"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 作品 3: 浮式風機 (工作專案) -->
+                    <div class="project-card flex flex-col overflow-hidden rounded-lg bg-gray-50 shadow-md transition-all duration-300">
+                        <img src="https://placehold.co/600x400/6366f1/ffffff?text=Wind+Turbine+CFD&font=inter" alt="浮式風機氣動力模擬" class="h-48 w-full object-cover">
+                        <div class="flex flex-1 flex-col p-6">
+                            <h3 class="mb-3 text-xl font-bold text-gray-900">新型浮式風機 - 氣動力流場模擬</h3>
+                            <p class="mb-4 flex-1 text-gray-700">
+                                (研發專案) 運用 <strong>CFD (COMSOL)</strong> 與 <strong>BEM (QBlade)</strong> 理論，進行風機葉片之氣動模擬與結構負載分析，評估新型垂直軸浮式風機可行性。
+                            </p>
+                            <div class="mb-4">
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">CFD</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">COMSOL</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800">流場分析</span>
+                                <span class="mb-2 mr-2 inline-block rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800">BEM</span>
+                            </div>
+                            <!-- 
+                              您的 GitHub Pages 連結 (來自您的履歷)
+                              這裡示範如何嵌入您的 GitHub 連結。
+                            -->
+                            <a href="https://teddy0126.github.io/Teddy/01_personal_profile.html" target="_blank" class="mt-auto inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
+                                查看相關經歷
+                                <ion-icon name="arrow-forward-outline" class="ml-1"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          Section 5: 聯絡表單 (Contact Form) & 頁尾 (Footer)
+          - 整合聯絡表單和頁尾，提供清晰的行動呼籲。
+          - 包含 LinkedIn 和 GitHub (作品集) 連結。
+        -->
+        <section id="contact" class="bg-gray-900 py-24 text-white">
+            <div class="container mx-auto max-w-6xl px-4">
+                <div class="grid grid-cols-1 gap-16 md:grid-cols-2">
+                    <!-- 左側聯絡資訊 -->
+                    <div>
+                        <h2 class="text-3xl font-bold md:text-4xl">與我聯繫</h2>
+                        <p class="mt-4 text-lg text-gray-300">
+                            感謝您瀏覽我的個人網站。
+                            若您對我的經歷感興趣，或認為我的技能符合貴公司的需求，歡迎隨時與我聯繫！
+                        </p>
+                        <div class="mt-8 space-y-4">
+                            <div class="flex items-center">
+                                <ion-icon name="mail-outline" class="mr-3 text-2xl text-blue-400"></ion-icon>
+                                <a href="mailto:aaa50907@gmail.com" class="text-gray-200 hover:text-white">aaa50907@gmail.com</a>
+                            </div>
+                            <div class="flex items-center">
+                                <ion-icon name="call-outline" class="mr-3 text-2xl text-blue-400"></ion-icon>
+                                <span class="text-gray-200">0906-389-126 (10:00 - 21:00)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <ion-icon name="location-outline" class="mr-3 text-2xl text-blue-400"></ion-icon>
+                                <span class="text-gray-200">新北市板橋區 (可配合 台北市 / 新北市 / 桃園市)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 
+                      右側聯絡表單 (設計稿)
+                      - 注意：這是一個靜態表單，僅供設計展示。
+                      - 實際應用中，您需要後端服務 (如 Netlify Forms, Formspree) 來接收表單內容。
+                    -->
+                    <div>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300">您的姓名</label>
+                                <input type="text" id="name" name="name" required
+                                    class="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 px-4 py-3 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300">您的 Email</label>
+                                <input type="email" id="email" name="email" required
+                                    class="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 px-4 py-3 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-300">主旨</label>
+                                <input type="text" id="subject" name="subject" required
+                                    class="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 px-4 py-3 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300">訊息</label>
+                                <textarea id="message" name="message" rows="4" required
+                                    class="mt-1 block w-full rounded-md border-gray-600 bg-gray-800 px-4 py-3 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full rounded-full bg-blue-600 px-8 py-3 font-medium text-white shadow-lg transition-all hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                                    傳送訊息
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 
+                  頁尾 (Footer)
+                  - 包含必要的社群連結與版權宣告。
+                -->
+                <hr class="mt-16 border-gray-700">
+                <div class="mt-8 flex flex-col items-center justify-between sm:flex-row">
+                    <p class="text-sm text-gray-400">&copy; 2025 蘇銘泰 (Teddy Su). All rights reserved.</p>
+                    <div class="mt-4 flex space-x-6 sm:mt-0">
+                        <!-- 
+                          請將 href="#" 替換成您的 LinkedIn 連結 
+                          並確認 GitHub 連結無誤
+                        -->
+                        <a href="#" target="_blank" class="text-2xl text-gray-400 hover:text-white">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                        <a href="https://github.com/teddy0126" target="_blank" class="text-2xl text-gray-400 hover:text-white">
+                            <ion-icon name="logo-github"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+      手機版選單的 JavaScript
+      - 用於切換手機版選單的顯示/隱藏。
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = menuButton.querySelector('ion-icon');
+
+            menuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                
+                // 切換圖示
+                if (isHidden) {
+                    menuIcon.setAttribute('name', 'menu-outline');
+                } else {
+                    menuIcon.setAttribute('name', 'close-outline');
+                }
+            });
+
+            // 點擊選單連結後自動關閉選單
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.setAttribute('name', 'menu-outline');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
